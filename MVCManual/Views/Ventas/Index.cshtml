@@ -1,0 +1,79 @@
+﻿@model MVCManual.Models.OrdenVista
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Nueva Venta</h2>
+
+@using (Html.BeginForm("Index", "Ventas", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Orden</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.cliente.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cliente.fecha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cliente.fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cliente.codigocliente, "codigocliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("codigocliente", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cliente.codigocliente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Agregar Producto", "AgregarProducto", new { }, new { @class = "btn btn-success" })
+            </div>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulos.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulos.cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulos.precio)
+                </th>
+                <th></th>
+            </tr>
+
+            @for (int i = 0; i < Model.Lproducto.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Lproducto[i].nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Lproducto[i].cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Lproducto[i].precio)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Lproducto[i].codigoproducto }) |
+                        @Html.ActionLink("Details", "Details", new {id = Model.Lproducto[i].codigoproducto }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Lproducto[i].codigoproducto })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MVCManual.Models.OrdenDetalle>
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2>Detalle</h2>
+<div class="table-responsive">
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.producto.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.producto.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+        </tr>
+    }
+
+    </table>
+</div>
+
